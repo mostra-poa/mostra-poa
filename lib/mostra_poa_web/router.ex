@@ -20,6 +20,11 @@ defmodule MostraPoaWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/app", MostraPoaWeb do
+    get "/", WebappController, :index
+    get "/*path", WebappController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", MostraPoaWeb do
   #   pipe_through :api
