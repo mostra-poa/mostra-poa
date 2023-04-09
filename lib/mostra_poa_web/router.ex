@@ -25,10 +25,10 @@ defmodule MostraPoaWeb.Router do
     get "/*path", WebappController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", MostraPoaWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", MostraPoaWeb do
+    pipe_through :api
+    resources "/posts", PostController, except: [:new, :edit]
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:mostra_poa, :dev_routes) do
