@@ -15,6 +15,10 @@ defmodule MostraPoaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: MostraPoaWeb.ApiAuthErrorHandler
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -30,6 +34,19 @@ defmodule MostraPoaWeb.Router do
   scope "/app", MostraPoaWeb do
     get "/", WebappController, :index
     get "/*path", WebappController, :index
+  end
+
+  scope "/api", MostraPoaWeb do
+    pipe_through :api
+
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api", MostraPoaWeb do
+    pipe_through [:api, :api_protected]
+    resources "/posts", PostController, except: [:new, :edit, :show, :index]
   end
 
   scope "/api", MostraPoaWeb do
