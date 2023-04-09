@@ -21,6 +21,10 @@ defmodule MostraPoa.Blog do
     Repo.all(Post)
   end
 
+  def list_visible_posts do
+    Repo.all(from p in Post, where: p.visible == true)
+  end
+
   @doc """
   Gets a single post.
 
