@@ -1,9 +1,7 @@
 defmodule MostraPoaWeb.RegistrationController do
   use MostraPoaWeb, :controller
 
-  alias Ecto.Changeset
   alias Plug.Conn
-  alias MostraPoaWeb.ErrorHelpers
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
@@ -11,10 +9,15 @@ defmodule MostraPoaWeb.RegistrationController do
     |> Pow.Plug.create_user(user_params)
     |> case do
       {:ok, _user, conn} ->
-        json(conn, %{data: %{token: conn.private[:api_auth_token], renew_token: conn.private[:api_renew_token]}})
+        json(conn, %{
+          data: %{
+            access_token: conn.private.api_access_token,
+            renewal_token: conn.private.api_renewal_token
+          }
+        })
 
       {:error, changeset, conn} ->
-        errors = Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1)
+        errors = MostraPoaWeb.ChangesetJSON.error(%{changeset: changeset})
 
         conn
         |> put_status(500)

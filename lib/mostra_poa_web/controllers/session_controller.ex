@@ -1,7 +1,8 @@
 defmodule MostraPoaWeb.SessionController do
   use MostraPoaWeb, :controller
 
-  alias MostraPoaWeb.ApiAuthPlug
+  alias MostraPoaWeb.APIAuthPlug
+  alias Plug.Conn
 
   @spec create(Conn.t(), map()) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
@@ -9,7 +10,7 @@ defmodule MostraPoaWeb.SessionController do
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        json(conn, %{data: %{token: conn.private[:api_auth_token], renew_token: conn.private[:api_renew_token]}})
+        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
 
       {:error, conn} ->
         conn
@@ -23,7 +24,7 @@ defmodule MostraPoaWeb.SessionController do
     config = Pow.Plug.fetch_config(conn)
 
     conn
-    |> ApiAuthPlug.renew(config)
+    |> APIAuthPlug.renew(config)
     |> case do
       {conn, nil} ->
         conn
@@ -31,14 +32,14 @@ defmodule MostraPoaWeb.SessionController do
         |> json(%{error: %{status: 401, message: "Invalid token"}})
 
       {conn, _user} ->
-        json(conn, %{data: %{token: conn.private[:api_auth_token], renew_token: conn.private[:api_renew_token]}})
+        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
     end
   end
 
   @spec delete(Conn.t(), map()) :: Conn.t()
   def delete(conn, _params) do
-    {:ok, conn} = Pow.Plug.clear_authenticated_user(conn)
-
-    json(conn, %{data: %{}})
+    conn
+    |> Pow.Plug.delete()
+    |> json(%{data: %{}})
   end
 end

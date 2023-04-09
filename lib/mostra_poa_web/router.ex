@@ -13,10 +13,11 @@ defmodule MostraPoaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug MostraPoaWeb.APIAuthPlug, otp_app: :mostra_poa
   end
 
   pipeline :api_protected do
-    plug Pow.Plug.RequireAuthenticated, error_handler: MostraPoaWeb.ApiAuthErrorHandler
+    plug Pow.Plug.RequireAuthenticated, error_handler: MostraPoaWeb.APIAuthErrorHandler
   end
 
   scope "/" do

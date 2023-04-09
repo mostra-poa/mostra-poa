@@ -1,4 +1,4 @@
-defmodule MostraPoaWeb.ApiAuthErrorHandler do
+defmodule MostraPoaWeb.APIAuthErrorHandler do
   use MostraPoaWeb, :controller
   alias Plug.Conn
 
