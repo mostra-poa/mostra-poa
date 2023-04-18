@@ -7,7 +7,7 @@ defmodule MostraPoaWeb.PostController do
   action_fallback MostraPoaWeb.FallbackController
 
   def index(conn, _params) do
-    posts = Blog.list_posts()
+    posts = Blog.list_visible_posts()
     render(conn, :index, posts: posts)
   end
 
