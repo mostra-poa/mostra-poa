@@ -1,8 +1,11 @@
+import DayList from "./day/DayList"
+
 export default function SessionPage() {
 
     return (
         <div>
-            <h1>Session Page</h1>
+            <h1>posts</h1>
+            <DayList/>
         </div>
     )
 }
