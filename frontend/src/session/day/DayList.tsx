@@ -6,8 +6,8 @@ type Session ={
     id: number;
     name: string;
     location: string;
-    startDate: string;
-    endDate: string;
+    start: string;
+    end: string;
 }
 export default function DayList() {
     const [sessions, setSessions] = useState<Session[]>([]);
@@ -28,8 +28,8 @@ export default function DayList() {
                         <li key={session.id}>
                             <h2>{session.name}</h2>
                             <p>{session.location}</p>
-                            <p>{session.startDate}</p>
-                            <p>{session.endDate}</p>   
+                            <p>{session.start}</p>
+                            <p>{session.end}</p>   
                         </li> 
                         ))}
                     </ul>

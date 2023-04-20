@@ -7,7 +7,7 @@ defmodule MostraPoaWeb.SessionController do
   action_fallback MostraPoaWeb.FallbackController
 
   def index(conn, _params) do
-    sessions = Sessions.list_sessions()
+    sessions = Sessions.list_visible_sessions()
     render(conn, :index, sessions: sessions)
   end
 
