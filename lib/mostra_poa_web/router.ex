@@ -27,7 +27,8 @@ defmodule MostraPoaWeb.Router do
 
   scope "/api", MostraPoaWeb do
     pipe_through :api
-    resources "/posts", PostController, except: [:new, :edit]
+    resources "/posts", PostController, only: [:show, :index]
+    resources "/sessions", SessionController, only: [:show, :index]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
