@@ -21,7 +21,13 @@ defmodule MostraPoa.SessionsTest do
     end
 
     test "create_session/1 with valid data creates a session" do
-      valid_attrs = %{end: ~N[2023-04-18 23:04:00], location: "some location", name: "some name", start: ~N[2023-04-18 23:04:00], visible: true}
+      valid_attrs = %{
+        end: ~N[2023-04-18 23:04:00],
+        location: "some location",
+        name: "some name",
+        start: ~N[2023-04-18 23:04:00],
+        visible: true
+      }
 
       assert {:ok, %Session{} = session} = Sessions.create_session(valid_attrs)
       assert session.end == ~N[2023-04-18 23:04:00]
@@ -37,7 +43,14 @@ defmodule MostraPoa.SessionsTest do
 
     test "update_session/2 with valid data updates the session" do
       session = session_fixture()
-      update_attrs = %{end: ~N[2023-04-19 23:04:00], location: "some updated location", name: "some updated name", start: ~N[2023-04-19 23:04:00], visible: false}
+
+      update_attrs = %{
+        end: ~N[2023-04-19 23:04:00],
+        location: "some updated location",
+        name: "some updated name",
+        start: ~N[2023-04-19 23:04:00],
+        visible: false
+      }
 
       assert {:ok, %Session{} = session} = Sessions.update_session(session, update_attrs)
       assert session.end == ~N[2023-04-19 23:04:00]
