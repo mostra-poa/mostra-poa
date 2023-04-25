@@ -13,12 +13,15 @@ defmodule MostraPoaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug MostraPoaWeb.APIAuthPlug, otp_app: :mostra_poa
+  end
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: MostraPoaWeb.APIAuthErrorHandler
   end
 
   scope "/" do
     pipe_through :browser
-
-    pow_routes()
   end
 
   scope "/", MostraPoaWeb do
@@ -34,8 +37,17 @@ defmodule MostraPoaWeb.Router do
 
   scope "/api", MostraPoaWeb do
     pipe_through :api
+
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    resources "/session", AuthSessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", AuthSessionController, :renew
+
     resources "/posts", PostController, only: [:show, :index]
     resources "/sessions", SessionController, only: [:show, :index]
+  end
+
+  scope "/api", MostraPoaWeb do
+    pipe_through [:api, :api_protected]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
