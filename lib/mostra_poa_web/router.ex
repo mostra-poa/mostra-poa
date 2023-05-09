@@ -22,6 +22,8 @@ defmodule MostraPoaWeb.Router do
 
   scope "/" do
     pipe_through :browser
+
+    pow_routes()
   end
 
   scope "/", MostraPoaWeb do
