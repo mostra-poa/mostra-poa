@@ -11,5 +11,4 @@ defmodule MostraPoaWeb.SessionControllerTest do
       assert json_response(conn, 200)["data"] == []
     end
   end
-
 end
