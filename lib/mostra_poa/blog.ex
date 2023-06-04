@@ -22,7 +22,11 @@ defmodule MostraPoa.Blog do
   end
 
   def list_visible_posts do
-    Repo.all(from p in Post, where: p.visible == true)
+    Repo.all(
+      from p in Post,
+        where: p.visible == true,
+        select: [:id, :title, :body, :inserted_at, :updated_at]
+    )
   end
 
   @doc """
