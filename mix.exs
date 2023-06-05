@@ -9,7 +9,10 @@ defmodule MostraPoa.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/project.plt"}, plt_add_apps: [:mix]
+      ]
     ]
   end
 
@@ -50,7 +53,8 @@ defmodule MostraPoa.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:pow, "~> 1.0.29"}
+      {:pow, "~> 1.0.29"},
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false}
     ]
   end
 
