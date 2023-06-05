@@ -21,9 +21,7 @@ defmodule MostraPoa.Sessions do
     Repo.all(Session)
   end
 
-  def list_visible_sessions do
-    Repo.all(from s in Session, where: s.visible == true)
-  end
+  def list_visible_sessions, do: Repo.all_visible(Session)
 
   @doc """
   Gets a single session.

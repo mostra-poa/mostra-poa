@@ -19,8 +19,7 @@ defmodule MostraPoaWeb.PostJSON do
     %{
       id: post.id,
       title: post.title,
-      body: post.body,
-      visible: post.visible
+      body: post.body
     }
   end
 end

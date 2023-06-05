@@ -21,8 +21,7 @@ defmodule MostraPoaWeb.SessionJSON do
       name: session.name,
       location: session.location,
       start: session.start,
-      end: session.end,
-      visible: session.visible
+      end: session.end
     }
   end
 end
