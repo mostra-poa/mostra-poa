@@ -1,5 +1,7 @@
 # MostraPoa
 
+[![Coverage Status](https://coveralls.io/repos/github/mostra-poa/mostra-poa/badge.svg?branch=coverage)](https://coveralls.io/github/mostra-poa/mostra-poa?branch=coverage)
+
 To start your Phoenix server:
 
 ```bash
