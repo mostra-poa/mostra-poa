@@ -12,8 +12,9 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 To start your React app:
 
 ```bash
-npm --prefix frontend install
-npm --prefix frontend run dev
+cd ./frontend
+npm install
+npm run dev
 ```
 
 Now you can visit [`localhost:5173`](http://localhost:5173) from your browser.
