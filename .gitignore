@@ -36,3 +36,5 @@ mostra_poa-*.tar
 npm-debug.log
 /assets/node_modules/
 
+/priv/plts/project.plt
+/priv/plts/project.plt.hash
