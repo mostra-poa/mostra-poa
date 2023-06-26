@@ -7,11 +7,20 @@ defmodule MostraPoa.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.github": :test
+      ],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       dialyzer: [
-        plt_file: {:no_warn, "priv/plts/project.plt"}, plt_add_apps: [:mix]
+        plt_file: {:no_warn, "priv/plts/project.plt"},
+        plt_add_apps: [:mix]
       ]
     ]
   end
@@ -54,7 +63,8 @@ defmodule MostraPoa.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:pow, "~> 1.0.29"},
-      {:dialyxir, "~> 1.3", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
