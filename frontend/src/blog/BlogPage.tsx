@@ -4,7 +4,7 @@ export default function BlogPage() {
 
     return (
         <div>
-            <h1>posts</h1>
+            <h1>Posts</h1>
             <PostList/>
         </div>
     )
